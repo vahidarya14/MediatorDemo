@@ -1,5 +1,7 @@
-﻿using DemoDAL.Models;
+﻿using DemoDAL.Entiries;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DemoDAL.DbContexts
 {

@@ -1,9 +1,4 @@
 ﻿namespace DemoCQRS
 {
-    public class PersonModel
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-    }
+    public record PersonModel(int Id , string FirstName, string LastName);
 }

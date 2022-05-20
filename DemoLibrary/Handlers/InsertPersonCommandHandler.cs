@@ -1,5 +1,5 @@
 ﻿using DemoCQRS.Commands;
-using DemoDAL.Models;
+using DemoDAL.Entiries;
 using DemoDAL.Repositories;
 using MediatR;
 using System.Threading;
@@ -18,11 +18,11 @@ namespace DemoCQRS.Handlers
             _mediator = mediator;
         }
 
-        public Task<PersonModel> Handle(InsertPersonCommand request, CancellationToken cancellationToken)
+        public async Task<PersonModel> Handle(InsertPersonCommand request, CancellationToken cancellationToken)
         {
-            var entity= _db.Insert(new PersonEntity { FirstName = request.FirstName, LastName = request.LastName });
+            var entity=await _db.InsertAsync(new PersonEntity ( request.FirstName, request.LastName ));
             _mediator.Publish(request);
-            return Task.FromResult(new PersonModel { FirstName=entity.FirstName,LastName=entity.LastName,Id=entity.Id});
+            return new PersonModel(entity.Id, entity.FirstName,entity.LastName);
         }
     }
 }

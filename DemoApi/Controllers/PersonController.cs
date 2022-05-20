@@ -36,10 +36,20 @@ namespace DemoApi.Controllers
         }
 
         [HttpPost]
-        public async Task<PersonModel> Post(PersonModel value)
+        public async Task<PersonModel> Post(PersonDto value)
         {
             return await _mediatoR.Send(new InsertPersonCommand(value.FirstName,value.LastName));
         }
 
+
+
+        [HttpPut("{id}")]
+        public async Task<PersonModel> Post(int id, PersonModel value)
+        {
+            if(id!=value.Id)
+                throw new System.Exception();
+
+            return await _mediatoR.Send(new UpdatePersonCommand(value.Id,value.FirstName, value.LastName));
+        }
     }
 }

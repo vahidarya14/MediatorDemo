@@ -1,5 +1,7 @@
-﻿using DemoDAL.Models;
+﻿using DemoDAL.Entiries;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DemoDAL.DbContexts
 {
@@ -7,7 +9,6 @@ namespace DemoDAL.DbContexts
     {
         DbSet<PersonEntity> People { get; set; }
 
-
-        int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

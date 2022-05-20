@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using DemoDAL.Models;
 using DemoDAL.DbContexts;
 using DemoDAL.Repositories;
 using DemoCQRS.PipelineBehaviors;
-using DemoCQRS.Queries;
-using System.Collections.Generic;
+using DemoDAL.Entiries;
 
 namespace DemoCQRS
 {

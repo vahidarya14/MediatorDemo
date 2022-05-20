@@ -1,7 +1,9 @@
 ﻿using DemoDAL.DbContexts;
-using DemoDAL.Models;
+using DemoDAL.Entiries;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DemoDAL.Repositories
 {
@@ -18,10 +20,21 @@ namespace DemoDAL.Repositories
         public List<PersonEntity> GetItems() => _dbContext.People.ToList();
 
 
-        public PersonEntity Insert(PersonEntity p)
+        public async Task<PersonEntity> InsertAsync(PersonEntity p)
         {
-            _dbContext.People.Add(p);
-            _dbContext.SaveChanges();
+            await _dbContext.People.AddAsync(p);
+            await _dbContext.SaveChangesAsync();
+            return p;
+        }
+
+        public async Task<PersonEntity> UpdateAsync(PersonEntity model)
+        {
+            var p = await _dbContext.People.FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            p.FirstName=model.FirstName;
+            p.LastName=model.LastName;
+            _dbContext.People.Update(p);
+            await _dbContext.SaveChangesAsync(); ;
             return p;
         }
     }

@@ -1,5 +1,4 @@
-﻿using DemoDAL.Models;
-using MediatR;
+﻿using MediatR;
 
 namespace DemoCQRS.Queries
 {
